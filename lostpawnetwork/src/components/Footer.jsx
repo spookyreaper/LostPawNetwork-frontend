@@ -1,12 +1,11 @@
-// src/components/Footer.jsx
 import React from 'react';
 
-function Footer() {
-    return (
-        <footer className="bg-gray-200 text-center text-sm p-3 absolute bottom-0 w-full">
-            © 2024 LostPawNetwork. All rights reserved.
-        </footer>
-    );
-}
+const Footer = () => {
+  return (
+    <footer className="bg-gray-800 text-white p-4 text-center">
+      &copy; 2024 Lost Paw Network. All rights reserved.
+    </footer>
+  );
+};
 
 export default Footer;

@@ -1,13 +1,20 @@
-// src/pages/HomePage.jsx
 import React from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import Home from '../components/Home';
 
-function HomePage() {
+const HomePage = () => {
   return (
-    <div className="max-w-4xl mx-auto mt-10 text-center">
-      <h1 className="text-4xl font-bold">Home Page</h1>
-      <p className="mt-2 text-gray-600">Welcome to the home page!</p>
+    <div className="bg-gray-100 min-h-screen">
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <Home />
+      </main>
+      <Footer />
     </div>
   );
-}
+};
 
 export default HomePage;

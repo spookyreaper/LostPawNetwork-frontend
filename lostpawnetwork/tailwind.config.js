@@ -1,10 +1,11 @@
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",  // make sure this matches the paths to all your components
-    "./public/index.html"
-  ],
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
+  variants: {
+    extend: {},
+  },
   plugins: [],
-}
+};
