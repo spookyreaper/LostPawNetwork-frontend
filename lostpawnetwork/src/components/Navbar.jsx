@@ -34,8 +34,7 @@ const Navbar = () => {
         </div>
         <ul className={`flex-col md:flex-row md:flex space-x-0 md:space-x-4 ${isOpen ? 'flex' : 'hidden'} md:block mt-4 md:mt-0`}>
           <li className="mb-2 md:mb-0"><Link to="/">Home</Link></li>
-          <li className="mb-2 md:mb-0"><Link to="/lost-pets">Lost Pets</Link></li>
-          <li className="mb-2 md:mb-0"><Link to="/found-pets">Found Pets</Link></li>
+          <li className="mb-2 md:mb-0"><Link to="/reports">Reports</Link></li>
           <li className="mb-2 md:mb-0"><Link to="/login">Login</Link></li>
           <li className="mb-2 md:mb-0"><Link to="/register">Signup</Link></li>
           <li className="mb-2 md:mb-0 bg-green-500 px-3 py-1 rounded hover:bg-green-600"><Link to="/report">Report a Lost Pet</Link></li>
