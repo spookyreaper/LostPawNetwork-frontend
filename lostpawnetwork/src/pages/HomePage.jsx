@@ -5,13 +5,11 @@ import Home from '../components/Home';
 
 const HomePage = () => {
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <header>
-        <Navbar />
-      </header>
-      <main>
+    <div className="bg-gray-100 min-h-screen flex flex-col">
+      <Navbar />
+      <div className="flex-grow">
         <Home />
-      </main>
+      </div>
       <Footer />
     </div>
   );

@@ -9,14 +9,16 @@ import CompleteProfilePage from './pages/CompleteProfilePage';
 function App() {
   return (
     <Router>
-      <div className="container mx-auto px-4">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/reports" element={<ReportPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/complete-profile" element={<CompleteProfilePage />} />
-        </Routes>
+      <div className="flex flex-col min-h-screen">
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/reports" element={<ReportPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/complete-profile" element={<CompleteProfilePage />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );

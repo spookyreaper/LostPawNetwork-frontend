@@ -1,11 +1,16 @@
 import React from 'react';
-import ReportList from '../components/ReportList';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import Report from '../components/Reports';
 
 const ReportPage = () => {
   return (
-    <div className="max-w-4xl mx-auto mt-10">
-      <h1 className="text-3xl font-bold text-center mb-4">Reports</h1>
-      <ReportList />
+    <div className="bg-gray-100 min-h-screen flex flex-col">
+      <Navbar />
+      <div className="flex-grow">
+        <Report />
+      </div>
+      <Footer />
     </div>
   );
 };

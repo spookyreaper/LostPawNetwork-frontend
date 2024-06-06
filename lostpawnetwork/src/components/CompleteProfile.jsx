@@ -7,7 +7,7 @@ function CompleteProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:1337/api/user/complete-profile', {
+      const response = await fetch('http://localhost:1337/user/complete-profile', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

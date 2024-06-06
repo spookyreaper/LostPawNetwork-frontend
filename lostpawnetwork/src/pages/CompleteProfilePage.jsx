@@ -1,12 +1,18 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import CompleteProfile from '../components/CompleteProfile';
 
-function CompleteProfilePage() {
+const CompleteProfilePage = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <CompleteProfile />
+    <div className="bg-gray-100 min-h-screen flex flex-col">
+      <Navbar />
+      <div className="flex-grow flex items-center justify-center">
+        <CompleteProfile />
+      </div>
+      <Footer />
     </div>
   );
-}
+};
 
 export default CompleteProfilePage;
