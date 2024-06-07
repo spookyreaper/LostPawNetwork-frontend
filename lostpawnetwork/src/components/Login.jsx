@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
-function Login({ onLoginSuccess, onLoginError }) {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -17,13 +19,13 @@ function Login({ onLoginSuccess, onLoginError }) {
       });
       const data = await response.json();
       if (response.ok) {
-        onLoginSuccess(data);
+        login(data.token); // Call login from AuthContext
         navigate('/'); // Redirect to home page or dashboard
       } else {
-        onLoginError(data.message);
+        console.error('Login error:', data.message);
       }
     } catch (error) {
-      onLoginError('Network error');
+      console.error('Network error:', error);
     }
   };
 

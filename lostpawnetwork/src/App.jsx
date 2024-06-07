@@ -5,23 +5,34 @@ import ReportPage from './pages/ReportPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import CompleteProfilePage from './pages/CompleteProfilePage';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   const [userId, setUserId] = useState(null);
 
+  const handleLoginSuccess = (data) => {
+    setUserId(data.userId);
+  };
+
+  const handleLoginError = (message) => {
+    console.error('Login error:', message);
+  };
+
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/register" element={<RegisterPage setUserId={setUserId} />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/complete-profile" element={<CompleteProfilePage userId={userId} />} />
-          </Routes>
+    <AuthProvider>
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <div className="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/register" element={<RegisterPage setUserId={setUserId} />} />
+              <Route path="/login" element={<LoginPage onLoginSuccess={handleLoginSuccess} onLoginError={handleLoginError} />} />
+              <Route path="/complete-profile" element={<CompleteProfilePage userId={userId} />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
+  const navigate = useNavigate();
+  const { isLoggedIn, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+    setIsAccountOpen(false);
+    navigate('/login');
+  };
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleAccountMenu = () => {
+    setIsAccountOpen(!isAccountOpen);
+  };
 
   return (
     <nav className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="logo text-2xl font-bold">Lost Paw Network</div>
+        <div className="logo text-2xl font-bold">
+          <Link to="/">Lost Paw Network</Link>
+        </div>
         <div className="md:hidden">
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={toggleMenu}
             type="button"
             className="text-gray-500 hover:text-white focus:outline-none focus:text-white"
             aria-label="toggle menu"
@@ -32,11 +52,26 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
-        <ul className={`flex-col md:flex-row md:flex space-x-0 md:space-x-4 ${isOpen ? 'flex' : 'hidden'} md:block mt-4 md:mt-0`}>
+        <ul className={`md:flex space-x-4 ${isOpen ? 'block' : 'hidden'} md:block`}>
           <li className="mb-2 md:mb-0"><Link to="/">Home</Link></li>
           <li className="mb-2 md:mb-0"><Link to="/reports">Reports</Link></li>
-          <li className="mb-2 md:mb-0"><Link to="/login">Login</Link></li>
-          <li className="mb-2 md:mb-0"><Link to="/register">Signup</Link></li>
+          {isLoggedIn ? (
+            <li className="relative mb-2 md:mb-0">
+              <button className="focus:outline-none" onClick={toggleAccountMenu}>
+                My Account
+              </button>
+              <ul className={`absolute bg-gray-800 text-white right-0 mt-2 py-2 w-48 border rounded-lg ${isAccountOpen ? 'block' : 'hidden'}`}>
+                <li className="px-4 py-2 hover:bg-gray-700"><Link to="/profile">Profile</Link></li>
+                <li className="px-4 py-2 hover:bg-gray-700"><Link to="/settings">Settings</Link></li>
+                <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer" onClick={handleLogout}>Logout</li>
+              </ul>
+            </li>
+          ) : (
+            <>
+              <li className="mb-2 md:mb-0"><Link to="/login">Login</Link></li>
+              <li className="mb-2 md:mb-0"><Link to="/register">Signup</Link></li>
+            </>
+          )}
           <li className="mb-2 md:mb-0 bg-green-500 px-3 py-1 rounded hover:bg-green-600"><Link to="/report">Report a Lost Pet</Link></li>
         </ul>
       </div>

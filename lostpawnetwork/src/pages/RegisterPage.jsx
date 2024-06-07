@@ -8,8 +8,7 @@ const RegisterPage = (props) => {
     <div className="bg-gray-100 min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-grow flex items-center justify-center">
-        <Register setUserId={props.setUserId}/>
-
+        <Register setUserId={props.setUserId} />
       </div>
       <Footer />
     </div>

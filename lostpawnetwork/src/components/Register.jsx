@@ -7,8 +7,6 @@ function Register(props) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  console.log(props);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
