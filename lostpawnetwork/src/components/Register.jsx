@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Register() {
+function Register(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+
+  console.log(props);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,11 +17,13 @@ function Register() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username, email, password })
+        body: JSON.stringify({ username, email, password }),
+        credentials: 'include'
       });
       const data = await response.json();
       if (response.ok) {
-        navigate('/complete-profile'); // Redirect to complete profile page
+        props.setUserId(data.user.id); 
+        navigate('/complete-profile'); 
       } else {
         console.error('Registration failed:', data);
       }

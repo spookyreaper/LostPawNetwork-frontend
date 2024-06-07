@@ -12,7 +12,8 @@ function Login({ onLoginSuccess, onLoginError }) {
       const response = await fetch('http://localhost:1337/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
+        credentials: 'include'
       });
       const data = await response.json();
       if (response.ok) {

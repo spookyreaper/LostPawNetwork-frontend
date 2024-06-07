@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function CompleteProfile() {
-  const [name, setName] = useState('');
+function CompleteProfile({ userId }) {
   const [contactInfo, setContactInfo] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -10,14 +11,15 @@ function CompleteProfile() {
       const response = await fetch('http://localhost:1337/user/complete-profile', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming you store the token in localStorage
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, contactInfo })
+        body: JSON.stringify({ id: userId, contactInfo }),
+        credentials: 'include'
       });
       const data = await response.json();
       if (response.ok) {
         console.log('Profile completed successfully:', data);
+        navigate('/'); // Redirect to the home page or another page
       } else {
         console.error('Profile completion failed:', data);
       }
@@ -30,17 +32,6 @@ function CompleteProfile() {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-6 text-center">Complete Profile</h2>
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </div>
         <div className="mb-4">
           <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-700">Contact Info</label>
           <input
