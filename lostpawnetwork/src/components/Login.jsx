@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
-function Login() {
+const Login = ({ onLoginSuccess, onLoginError }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
@@ -19,18 +19,17 @@ function Login() {
       });
       const data = await response.json();
       if (response.ok) {
-        login(data.token); // Call login from AuthContext
-        navigate('/'); // Redirect to home page or dashboard
+        login(data.token, data.userId); // Pass token and userId
+        onLoginSuccess(data);
+        navigate('/');
       } else {
+        onLoginError(data.message);
         console.error('Login error:', data.message);
       }
     } catch (error) {
+      onLoginError('Network error');
       console.error('Network error:', error);
     }
-  };
-
-  const handleSignupNavigation = () => {
-    navigate('/register');
   };
 
   return (
@@ -60,13 +59,8 @@ function Login() {
       <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
         Login
       </button>
-      <div className="text-center mt-4">
-        <button type="button" onClick={handleSignupNavigation} className="text-indigo-600 hover:text-indigo-500">
-          Don't have an account? Click here to sign up
-        </button>
-      </div>
     </form>
   );
-}
+};
 
 export default Login;
