@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
-const Login = ({ onLoginSuccess, onLoginError }) => {
+const Login = ({ onLoginSuccess, onLoginError, setUserId }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
@@ -21,6 +21,7 @@ const Login = ({ onLoginSuccess, onLoginError }) => {
       if (response.ok) {
         login(data.token, data.userId); // Pass token and userId
         onLoginSuccess(data);
+        setUserId(data.userId); // Update userId in the context
         navigate('/');
       } else {
         onLoginError(data.message);
