@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Register = ({ setUserId }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log('Register form submitted');
     try {
       const response = await fetch('http://localhost:1337/user/register', {
         method: 'POST',
@@ -17,9 +20,12 @@ const Register = ({ setUserId }) => {
         credentials: 'include'
       });
       const data = await response.json();
+      console.log('Registration response:', response);
+      console.log('Registration data:', data);
       if (response.ok) {
-        setUserId(data.user.id); // Save the user ID on successful registration
-        navigate('/');
+        setUserId(data.user.id);
+        login(data.token, data.user.id); // Call the login function to update the context
+        navigate('/complete-profile');
       } else {
         console.error('Registration error:', data.message);
       }

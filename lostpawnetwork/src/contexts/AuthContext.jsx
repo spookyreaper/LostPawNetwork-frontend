@@ -1,4 +1,3 @@
-// AuthContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext();
@@ -10,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     const storedUserId = localStorage.getItem('userId');
+    console.log('AuthProvider useEffect: storedToken:', storedToken, 'storedUserId:', storedUserId);
     if (storedToken) {
       setToken(storedToken);
       setUserId(storedUserId);
@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (token, userId) => {
+    console.log('AuthProvider login: token:', token, 'userId:', userId);
     setToken(token);
     setUserId(userId);
     localStorage.setItem('token', token);
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    console.log('AuthProvider logout');
     setToken(null);
     setUserId(null);
     localStorage.removeItem('token');

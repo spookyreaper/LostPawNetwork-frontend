@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -7,7 +7,11 @@ const Navbar = () => {
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isReportsOpen, setIsReportsOpen] = useState(false);
   const navigate = useNavigate();
-  const { isLoggedIn, logout } = useContext(AuthContext);
+  const { isLoggedIn, logout, userId } = useContext(AuthContext);
+
+  useEffect(() => {
+    console.log('Navbar useEffect: isLoggedIn:', isLoggedIn, 'userId:', userId);
+  }, [isLoggedIn, userId]);
 
   const handleLogout = () => {
     logout();

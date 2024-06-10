@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 function CompleteProfile({ userId }) {
   const [contactInfo, setContactInfo] = useState('');
   const navigate = useNavigate();
+  const { token } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,7 +13,8 @@ function CompleteProfile({ userId }) {
       const response = await fetch('http://localhost:1337/user/complete-profile', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ id: userId, contactInfo }),
         credentials: 'include'

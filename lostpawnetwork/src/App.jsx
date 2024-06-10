@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ReportPage from './pages/ReportPage';
@@ -7,8 +7,8 @@ import RegisterPage from './pages/RegisterPage';
 import CompleteProfilePage from './pages/CompleteProfilePage';
 import ProfilePage from './pages/ProfilePage';
 import EditProfilePage from './pages/EditProfilePage';
-import LostDogsPage from './pages/LostDogsPage';
-import LostCatsPage from './pages/LostCatsPage';
+import LostPetsAll from './components/LostPetsAll'; // Make sure this is imported correctly
+import LostDogsPage from './pages/LostDogsPage'; // Make sure this is imported correctly
 import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
@@ -40,8 +40,8 @@ function App() {
               <Route path="/profile" element={<ProfilePage userId={userId} />} />
               <Route path="/edit-profile" element={<EditProfilePage userId={userId} />} />
               <Route path="/profile/:id" element={<ProfilePage />} />
+              <Route path="/reports/lost/all" element={<LostPetsAll />} />
               <Route path="/reports/lost/dogs" element={<LostDogsPage />} />
-              <Route path="/reports/lost/cats" element={<LostCatsPage />} />
             </Routes>
           </div>
         </div>
