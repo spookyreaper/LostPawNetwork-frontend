@@ -7,8 +7,13 @@ import RegisterPage from './pages/RegisterPage';
 import CompleteProfilePage from './pages/CompleteProfilePage';
 import ProfilePage from './pages/ProfilePage';
 import EditProfilePage from './pages/EditProfilePage';
-import LostPetsAll from './components/LostPetsAll'; // Make sure this is imported correctly
-import LostDogsPage from './pages/LostDogsPage'; // Make sure this is imported correctly
+import LostDogsPage from './pages/LostDogsPage';
+import LostCatsPage from './pages/LostCatsPage';
+import LostPetsAllPage from './pages/LostPetsAllPage';
+import FoundDogsPage from './pages/FoundDogsPage';
+import FoundCatsPage from './pages/FoundCatsPage';
+import FoundPetsAllPage from './pages/FoundPetsAllPage';
+import 'leaflet/dist/leaflet.css';
 import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
@@ -40,8 +45,13 @@ function App() {
               <Route path="/profile" element={<ProfilePage userId={userId} />} />
               <Route path="/edit-profile" element={<EditProfilePage userId={userId} />} />
               <Route path="/profile/:id" element={<ProfilePage />} />
-              <Route path="/reports/lost/all" element={<LostPetsAll />} />
+              <Route path="/reports/lost/all" element={<LostPetsAllPage />} />
               <Route path="/reports/lost/dogs" element={<LostDogsPage />} />
+              <Route path="/reports/lost/cats" element={<LostCatsPage />} />
+              <Route path="/reports/found/all" element={<FoundPetsAllPage />} />
+              <Route path="/reports/found/dogs" element={<FoundDogsPage />} />
+              <Route path="/reports/found/cats" element={<FoundCatsPage />} />
+              <Route path="/report" element={<ReportPage UserId={userId}/>} />
             </Routes>
           </div>
         </div>

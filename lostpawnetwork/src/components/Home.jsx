@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReportList from '../components/ReportList';
 import SearchFilter from '../components/SearchFilter';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import MapComponent from '../components/MapComponent';
 
 function Home() {
   const [reports, setReports] = useState([]);
@@ -21,11 +20,11 @@ function Home() {
     <>
       <main className="p-4 md:p-8 min-h-screen bg-gray-100">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="md:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div className="lg:col-span-2">
               <div className="bg-white p-4 rounded-lg shadow-md border-t-4 border-indigo-600 card">
                 <h1 className="text-2xl font-bold mb-2 text-gray-800">Maps showing a location of the missing pets</h1>
-                <div className="h-64 bg-gray-200 flex items-center justify-center text-gray-600">Map will be displayed here.</div>
+                <MapComponent reports={reports} />
               </div>
             </div>
             <div>
