@@ -28,7 +28,14 @@ const Profile = ({ user, lostReports, foundReports }) => {
           <ul className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             {lostReports.map((report) => (
               <li key={report.id} className="bg-white p-4 rounded-lg shadow-md">
-                <p className="text-gray-800">{report.description}</p>
+                {report.photoUrls && report.photoUrls.length > 0 && (
+                  <img src={`http://localhost:1337${report.photoUrls[0]}`} alt={report.description} className="w-full h-32 object-cover rounded mt-2" />
+                )}
+                <h3 className="text-lg font-bold mt-2 text-black">{report.petName || 'No pet info'}</h3>
+                <p className="text-gray-600">{report.description}</p>
+                <p className="text-gray-600"><strong>Status:</strong> {report.status}</p>
+                <p className="text-gray-600"><strong>Location:</strong> Lat: {report.latitude}, Lng: {report.longitude}</p>
+                <p className="text-gray-600"><strong>Contact Info:</strong> {report.contactInfo}</p>
               </li>
             ))}
           </ul>
@@ -43,7 +50,14 @@ const Profile = ({ user, lostReports, foundReports }) => {
           <ul className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             {foundReports.map((report) => (
               <li key={report.id} className="bg-white p-4 rounded-lg shadow-md">
-                <p className="text-gray-800">{report.description}</p>
+                {report.photoUrls && report.photoUrls.length > 0 && (
+                  <img src={`http://localhost:1337${report.photoUrls[0]}`} alt={report.description} className="w-full h-32 object-cover rounded mt-2" />
+                )}
+                <h3 className="text-lg font-bold mt-2 text-black">{report.petName || 'No pet info'}</h3>
+                <p className="text-gray-600">{report.description}</p>
+                <p className="text-gray-600"><strong>Status:</strong> {report.status}</p>
+                <p className="text-gray-600"><strong>Location:</strong> Lat: {report.latitude}, Lng: {report.longitude}</p>
+                <p className="text-gray-600"><strong>Contact Info:</strong> {report.contactInfo}</p>
               </li>
             ))}
           </ul>

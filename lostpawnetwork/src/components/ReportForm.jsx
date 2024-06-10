@@ -1,4 +1,3 @@
-// ReportForm.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
@@ -81,7 +80,7 @@ const ReportForm = ({ userId }) => {
             value={petName}
             onChange={(e) => setPetName(e.target.value)}
             required
-            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-black"
           />
         </div>
         <div>
@@ -90,7 +89,7 @@ const ReportForm = ({ userId }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
-            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-black"
           ></textarea>
         </div>
         <div>
@@ -110,7 +109,7 @@ const ReportForm = ({ userId }) => {
             value={contactInfo}
             onChange={(e) => setContactInfo(e.target.value)}
             required
-            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-black"
           />
         </div>
         <div>
@@ -145,7 +144,7 @@ const ReportForm = ({ userId }) => {
             value={breed}
             onChange={(e) => setBreed(e.target.value)}
             required
-            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-black"
           />
         </div>
         <div>
@@ -155,7 +154,7 @@ const ReportForm = ({ userId }) => {
             value={color}
             onChange={(e) => setColor(e.target.value)}
             required
-            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-black"
           />
         </div>
         <div>
@@ -165,7 +164,7 @@ const ReportForm = ({ userId }) => {
             value={age}
             onChange={(e) => setAge(e.target.value)}
             required
-            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-black"
           />
         </div>
         <div>
@@ -199,7 +198,7 @@ const ReportForm = ({ userId }) => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             required
-            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-black"
           >
             <option value="cat">Cat</option>
             <option value="dog">Dog</option>
@@ -210,7 +209,7 @@ const ReportForm = ({ userId }) => {
           <input
             type="file"
             onChange={(e) => setPetPhoto(e.target.files[0])}
-            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-black"
           />
         </div>
         <button type="submit" className="w-full flex justify-center py-2 px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">

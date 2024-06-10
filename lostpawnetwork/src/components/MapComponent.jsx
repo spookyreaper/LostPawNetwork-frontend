@@ -29,6 +29,7 @@ const UpdateMapView = ({ userLocation }) => {
 
 const MapComponent = ({ reports }) => {
   const [userLocation, setUserLocation] = useState(null);
+  const nycCoordinates = [40.7128, -74.0060]; // NYC coordinates
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -47,7 +48,7 @@ const MapComponent = ({ reports }) => {
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
-      <MapContainer center={userLocation || [51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
+      <MapContainer center={nycCoordinates} zoom={13} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -56,7 +57,7 @@ const MapComponent = ({ reports }) => {
           <Marker key={report.id} position={[report.latitude, report.longitude]}>
             <Popup>
               <div>
-                <h3>{report.petName || 'No pet name'}</h3>
+                <h3>{report.pet?.name || report.petName || 'No pet name'}</h3>
                 <p>{report.description}</p>
                 <p><strong>Status:</strong> {report.status}</p>
                 <div>

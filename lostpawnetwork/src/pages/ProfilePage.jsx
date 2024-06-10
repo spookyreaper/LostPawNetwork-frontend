@@ -1,3 +1,4 @@
+// ProfilePage.jsx
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import Profile from '../components/Profile';
