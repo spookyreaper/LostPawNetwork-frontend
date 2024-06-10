@@ -7,7 +7,7 @@ function Home() {
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:1337/reports')
+    fetch('https://lostpawnetwork-100c261cba8a.herokuapp.com/reports')
       .then(response => response.json())
       .then(data => {
         console.log('Fetched reports:', data);

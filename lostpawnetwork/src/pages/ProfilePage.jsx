@@ -13,7 +13,7 @@ const ProfilePage = () => {
     const fetchUserProfile = async () => {
       console.log(`Fetching user profile data for userId: ${userId}`);
       try {
-        const response = await fetch(`http://localhost:1337/user/profile/${userId}`, {
+        const response = await fetch(`https://lostpawnetwork-100c261cba8a.herokuapp.com/user/profile/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

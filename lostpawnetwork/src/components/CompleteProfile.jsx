@@ -10,7 +10,7 @@ function CompleteProfile({ userId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:1337/user/complete-profile', {
+      const response = await fetch('https://lostpawnetwork-100c261cba8a.herokuapp.com/user/complete-profile', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

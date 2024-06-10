@@ -16,7 +16,7 @@ const LostPetsAll = () => {
       try {
         const query = new URLSearchParams(filters).toString();
         console.log('Fetching lost pets with query:', query); // Log the query being used
-        const response = await fetch(`http://localhost:1337/reports/lost/all?${query}`, {
+        const response = await fetch(`https://lostpawnetwork-100c261cba8a.herokuapp.com/reports/lost/all?${query}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,

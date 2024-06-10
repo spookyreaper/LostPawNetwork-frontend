@@ -15,7 +15,7 @@ const LostDogs = () => {
     const fetchLostDogs = async () => {
       try {
         const query = new URLSearchParams(filters).toString();
-        const response = await fetch(`http://localhost:1337/reports/lost/dogs?${query}`, {
+        const response = await fetch(`https://lostpawnetwork-100c261cba8a.herokuapp.com/reports/lost/dogs?${query}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,

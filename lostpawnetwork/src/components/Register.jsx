@@ -13,7 +13,7 @@ const Register = ({ setUserId }) => {
     event.preventDefault();
     console.log('Register form submitted');
     try {
-      const response = await fetch('http://localhost:1337/user/register', {
+      const response = await fetch('https://lostpawnetwork-100c261cba8a.herokuapp.com/user/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),

@@ -8,7 +8,7 @@ const ReportDetailPage = () => {
   const [report, setReport] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:1337/reports/${id}`)
+    fetch(`https://lostpawnetwork-100c261cba8a.herokuapp.com/reports/${id}`)
       .then(response => response.json())
       .then(data => setReport(data))
       .catch(error => console.error('Failed to fetch report:', error));

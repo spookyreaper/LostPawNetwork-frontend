@@ -50,7 +50,7 @@ const ReportForm = ({ userId }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:1337/report', {
+      const response = await fetch('https://lostpawnetwork-100c261cba8a.herokuapp.com/report', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
