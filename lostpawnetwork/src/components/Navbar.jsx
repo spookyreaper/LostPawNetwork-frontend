@@ -5,6 +5,7 @@ import { AuthContext } from '../contexts/AuthContext';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
+  const [isReportsOpen, setIsReportsOpen] = useState(false);
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useContext(AuthContext);
 
@@ -18,15 +19,11 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const toggleAccountMenu = () => {
-    setIsAccountOpen(!isAccountOpen);
-  };
-
   return (
     <nav className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="logo text-2xl font-bold">
-          <Link to="/">Lost Paw Network</Link>
+          <Link to="/" className="text-white">Lost Paw Network</Link>
         </div>
         <div className="md:hidden">
           <button
@@ -53,13 +50,39 @@ const Navbar = () => {
           </button>
         </div>
         <ul className={`md:flex space-x-4 ${isOpen ? 'block' : 'hidden'} md:block`}>
-          <li className="mb-2 md:mb-0"><Link to="/">Home</Link></li>
-          <li className="mb-2 md:mb-0"><Link to="/reports">Reports</Link></li>
+          <li className="mb-2 md:mb-0"><Link to="/" className="text-indigo-600 hover:text-indigo-500">Home</Link></li>
+          <li className="relative mb-2 md:mb-0"
+            onMouseEnter={() => setIsReportsOpen(true)}
+            onMouseLeave={() => setIsReportsOpen(false)}
+          >
+            <div className="cursor-pointer text-indigo-600 hover:text-indigo-500 flex items-center">
+              Reports
+              <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+            <ul className={`absolute bg-gray-800 text-white mt-2 py-2 w-48 border rounded-lg ${isReportsOpen ? 'block' : 'hidden'}`}>
+              <li className="px-4 py-2 text-gray-400 cursor-default">Lost Pets</li>
+              <li className="px-4 py-2 hover:bg-gray-700"><Link to="/reports/lost/all">All Pets</Link></li>
+              <li className="px-4 py-2 hover:bg-gray-700"><Link to="/reports/lost/cats">Cats</Link></li>
+              <li className="px-4 py-2 hover:bg-gray-700"><Link to="/reports/lost/dogs">Dogs</Link></li>
+              <li className="px-4 py-2 text-gray-400 cursor-default">Found Pets</li>
+              <li className="px-4 py-2 hover:bg-gray-700"><Link to="/reports/found/all">All Pets</Link></li>
+              <li className="px-4 py-2 hover:bg-gray-700"><Link to="/reports/found/cats">Cats</Link></li>
+              <li className="px-4 py-2 hover:bg-gray-700"><Link to="/reports/found/dogs">Dogs</Link></li>
+            </ul>
+          </li>
           {isLoggedIn ? (
-            <li className="relative mb-2 md:mb-0">
-              <button className="focus:outline-none" onClick={toggleAccountMenu}>
+            <li className="relative mb-2 md:mb-0"
+              onMouseEnter={() => setIsAccountOpen(true)}
+              onMouseLeave={() => setIsAccountOpen(false)}
+            >
+              <div className="cursor-pointer text-indigo-600 hover:text-indigo-500 flex items-center">
                 My Account
-              </button>
+                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
               <ul className={`absolute bg-gray-800 text-white right-0 mt-2 py-2 w-48 border rounded-lg ${isAccountOpen ? 'block' : 'hidden'}`}>
                 <li className="px-4 py-2 hover:bg-gray-700"><Link to="/profile">Profile</Link></li>
                 <li className="px-4 py-2 hover:bg-gray-700"><Link to="/settings">Settings</Link></li>
@@ -68,8 +91,8 @@ const Navbar = () => {
             </li>
           ) : (
             <>
-              <li className="mb-2 md:mb-0"><Link to="/login">Login</Link></li>
-              <li className="mb-2 md:mb-0"><Link to="/register">Signup</Link></li>
+              <li className="mb-2 md:mb-0"><Link to="/login" className="text-indigo-600 hover:text-indigo-500">Login</Link></li>
+              <li className="mb-2 md:mb-0"><Link to="/register" className="text-indigo-600 hover:text-indigo-500">Signup</Link></li>
             </>
           )}
           <li className="mb-2 md:mb-0 bg-green-500 px-3 py-1 rounded hover:bg-green-600"><Link to="/report">Report a Lost Pet</Link></li>

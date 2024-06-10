@@ -1,12 +1,13 @@
+// Login.jsx
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
-const Login = ({ onLoginSuccess, onLoginError, setUserId }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,16 +20,12 @@ const Login = ({ onLoginSuccess, onLoginError, setUserId }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        login(data.token, data.userId); // Pass token and userId
-        onLoginSuccess(data);
-        setUserId(data.userId); // Update userId in the context
-        navigate('/');
+        login(data.token, data.userId); // Save token and userId to context and local storage
+        navigate('/'); // Redirect to home page or dashboard
       } else {
-        onLoginError(data.message);
         console.error('Login error:', data.message);
       }
     } catch (error) {
-      onLoginError('Network error');
       console.error('Network error:', error);
     }
   };

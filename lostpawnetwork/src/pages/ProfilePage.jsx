@@ -1,42 +1,57 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import Profile from '../components/Profile';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
-const ProfilePage = ({ userId }) => {
-  const [user, setUser] = useState(null);
+const ProfilePage = () => {
+  const { userId, token } = useContext(AuthContext);
+  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      console.log(`Fetching user data for userId: ${userId}`);
-      const token = localStorage.getItem('token'); // Retrieve the token from local storage
+    const fetchUserProfile = async () => {
+      console.log(`Fetching user profile data for userId: ${userId}`);
       try {
-        const response = await fetch(`http://localhost:1337/user/${userId}`, {
+        const response = await fetch(`http://localhost:1337/user/profile/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
           credentials: 'include'
         });
+        console.log('Response status:', response.status); // Log response status
         const data = await response.json();
-        console.log('Fetched user data:', data);
+        console.log('Fetched user profile data:', data);
         if (response.ok) {
-          setUser(data);
+          setUserProfile(data);
         } else {
-          console.error('Failed to fetch user data:', data);
+          console.error('Failed to fetch user profile data:', data);
         }
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error fetching user profile data:', error);
       }
     };
 
-    if (userId) {
-      fetchUser();
+    if (userId && token) {
+      fetchUserProfile();
     }
-  }, [userId]);
+  }, [userId, token]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      {user ? <Profile user={user} /> : <p>Loading...</p>}
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <div className="flex-grow flex justify-center items-center">
+        {userProfile ? (
+          <Profile
+            user={userProfile.user}
+            lostReports={userProfile.lostReports}
+            foundReports={userProfile.foundReports}
+          />
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+      <Footer />
     </div>
   );
 };
