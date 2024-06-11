@@ -19,16 +19,21 @@ const Register = ({ setUserId }) => {
         body: JSON.stringify({ username, email, password }),
         credentials: 'include'
       });
+
+      // Check if the response is okay
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Registration error:', errorData.message);
+        return;
+      }
+
       const data = await response.json();
       console.log('Registration response:', response);
       console.log('Registration data:', data);
-      if (response.ok) {
-        setUserId(data.user.id);
-        login(data.token, data.user.id); // Call the login function to update the context
-        navigate('/complete-profile');
-      } else {
-        console.error('Registration error:', data.message);
-      }
+
+      setUserId(data.user.id);
+      login(data.token, data.user.id); // Call the login function to update the context
+      navigate('/complete-profile');
     } catch (error) {
       console.error('Network error:', error);
     }
