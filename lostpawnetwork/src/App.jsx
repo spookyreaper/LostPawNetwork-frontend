@@ -51,7 +51,7 @@ function App() {
               <Route path="/reports/found/all" element={<FoundPetsAllPage />} />
               <Route path="/reports/found/dogs" element={<FoundDogsPage />} />
               <Route path="/reports/found/cats" element={<FoundCatsPage />} />
-              <Route path="/report" element={<ReportPage UserId={userId}/>} />
+              <Route path="/report" element={<ReportPage UserId={userIdn}/>} />
             </Routes>
           </div>
         </div>
