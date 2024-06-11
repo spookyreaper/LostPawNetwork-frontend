@@ -1,32 +1,40 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
 
-  const login = (data) => {
-    setUserId(data.userId);
-    setToken(data.token);
-    localStorage.setItem('userId', data.userId);
-    localStorage.setItem('token', data.token);
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    const storedUserId = localStorage.getItem('userId');
+    console.log('AuthProvider useEffect: storedToken:', storedToken, 'storedUserId:', storedUserId);
+    if (storedToken) {
+      setToken(storedToken);
+      setUserId(storedUserId);
+    }
+  }, []);
+
+  const login = (token, userId) => {
+    console.log('AuthProvider login: token:', token, 'userId:', userId);
+    setToken(token);
+    setUserId(userId);
+    localStorage.setItem('token', token);
+    localStorage.setItem('userId', userId);
   };
 
   const logout = () => {
-    setUserId(null);
+    console.log('AuthProvider logout');
     setToken(null);
-    localStorage.removeItem('userId');
+    setUserId(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
   };
 
   return (
-    <AuthContext.Provider value={{ userId, token, login, logout }}>
+    <AuthContext.Provider value={{ token, userId, login, logout, isLoggedIn: !!token }}>
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  return useContext(AuthContext);
 };

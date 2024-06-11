@@ -40,7 +40,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/register" element={<RegisterPage setUserId={setUserId} />} />
-              <Route path="/login" element={<LoginPage onLoginSuccess={handleLoginSuccess} onLoginError={handleLoginError} setUserId={setUserId} />} />
+              <Route path="/login" element={<LoginPage onLoginSuccess={handleLoginSuccess} onLoginError={handleLoginError} />} />
               <Route path="/complete-profile" element={<CompleteProfilePage userId={userId} />} />
               <Route path="/profile" element={<ProfilePage userId={userId} />} />
               <Route path="/edit-profile" element={<EditProfilePage userId={userId} />} />
@@ -51,7 +51,7 @@ function App() {
               <Route path="/reports/found/all" element={<FoundPetsAllPage />} />
               <Route path="/reports/found/dogs" element={<FoundDogsPage />} />
               <Route path="/reports/found/cats" element={<FoundCatsPage />} />
-              <Route path="/report" element={<ReportPage UserId={userIdn}/>} />
+              <Route path="/report" element={<ReportPage userId={userId} />} />
             </Routes>
           </div>
         </div>
