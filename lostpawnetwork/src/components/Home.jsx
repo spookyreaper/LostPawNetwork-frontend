@@ -30,7 +30,9 @@ function Home() {
             <div>
               <div className="bg-white p-4 rounded-lg shadow-md border-t-4 border-indigo-600 card">
                 <h2 className="text-xl font-semibold text-gray-800">Why this website exists</h2>
-                <p className="mt-2 text-gray-700">A small description of the memo of helping people to search for their pets.</p>
+                <p className="mt-2 text-gray-700">LostPawNetwork is dedicated to reuniting lost pets with their owners. Our mission is to provide a platform where people can report lost and found pets, share details, and connect with others in the community to ensure pets find their way back home.
+
+</p>
               </div>
             </div>
           </div>
