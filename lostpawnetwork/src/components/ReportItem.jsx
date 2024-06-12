@@ -2,15 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ReportItem = ({ report }) => {
-  // Parse location if it's a string
-  let locationString = report.location;
-  try {
-    const locationObj = JSON.parse(report.location);
-    locationString = `Lat: ${locationObj.lat}, Lng: ${locationObj.lng}`;
-  } catch (error) {
-    // If parsing fails, keep the original location string
-  }
-
   // Log the report to check the data structure
   console.log('Report data:', report);
 
@@ -26,6 +17,16 @@ const ReportItem = ({ report }) => {
   // Log the final image URL to be used
   console.log('Image URL:', imageUrl);
 
+  // Display latitude and longitude
+  let locationAddress;
+  try {
+    const locationObj = JSON.parse(report.location);
+    locationAddress = `Lat: ${locationObj.lat}, Lng: ${locationObj.lng}`;
+  } catch (error) {
+    console.error('Error parsing location:', error);
+    locationAddress = report.location; // Fallback to original location string if parsing fails
+  }
+
   return (
     <Link to={`/report/${report.id}`} className="block">
       <div className="bg-white p-4 rounded-lg shadow-md border-t-4 border-gray-800 hover:bg-gray-100 transition">
@@ -37,7 +38,8 @@ const ReportItem = ({ report }) => {
           </div>
         )}
         <h3 className="text-lg font-bold mt-2 text-black">{report.pet ? report.pet.name : report.petName || 'No pet info'}</h3>
-        <p className="text-gray-600">{locationString}</p>
+        <p className="text-gray-600">{locationAddress}</p>
+        <p className="text-gray-700 mt-2">{report.description}</p>
       </div>
     </Link>
   );
