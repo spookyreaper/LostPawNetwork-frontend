@@ -21,7 +21,6 @@ function CompleteProfile({ userId }) {
       });
       const data = await response.json();
       if (response.ok) {
-        console.log('Profile completed successfully:', data);
         navigate('/'); // Redirect to the home page or another page
       } else {
         console.error('Profile completion failed:', data);

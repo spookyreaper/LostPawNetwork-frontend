@@ -11,7 +11,6 @@ const Register = ({ setUserId }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Register form submitted');
     try {
       const response = await fetch('https://lostpawnetwork-100c261cba8a.herokuapp.com/user/register', {
         method: 'POST',
@@ -28,9 +27,6 @@ const Register = ({ setUserId }) => {
       }
 
       const data = await response.json();
-      console.log('Registration response:', response);
-      console.log('Registration data:', data);
-
       setUserId(data.user.id);
       login(data.token, data.user.id); // Call the login function to update the context
       navigate('/complete-profile');
