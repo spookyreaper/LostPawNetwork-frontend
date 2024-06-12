@@ -19,7 +19,6 @@ const UpdateMapView = ({ userLocation }) => {
   const map = useMap();
   useEffect(() => {
     if (userLocation) {
-      console.log('Updating map view to user location:', userLocation);
       map.setView(userLocation, 13);
     }
   }, [userLocation, map]);
@@ -36,7 +35,6 @@ const MapComponent = ({ reports }) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          console.log('User location:', { latitude, longitude });
           setUserLocation([latitude, longitude]);
         },
         (error) => {
@@ -47,7 +45,7 @@ const MapComponent = ({ reports }) => {
   }, []);
 
   return (
-    <div style={{ height: '400px', width: '100%' }}>
+    <div style={{ height: '400px', width: '100%', position: 'relative', zIndex: 0 }}>
       <MapContainer center={nycCoordinates} zoom={13} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

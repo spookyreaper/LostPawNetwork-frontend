@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -7,11 +7,7 @@ const Navbar = () => {
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isReportsOpen, setIsReportsOpen] = useState(false);
   const navigate = useNavigate();
-  const { isLoggedIn, logout, userId } = useContext(AuthContext);
-
-  useEffect(() => {
-    console.log('Navbar useEffect: isLoggedIn:', isLoggedIn, 'userId:', userId);
-  }, [isLoggedIn, userId]);
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   const handleLogout = () => {
     logout();
@@ -23,8 +19,16 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleReportsDropdown = () => {
+    setIsReportsOpen(!isReportsOpen);
+  };
+
+  const toggleAccountDropdown = () => {
+    setIsAccountOpen(!isAccountOpen);
+  };
+
   return (
-    <nav className="bg-gray-800 text-white p-4">
+    <nav className="bg-gray-800 text-white p-4 relative z-50">
       <div className="container mx-auto flex justify-between items-center">
         <div className="logo text-2xl font-bold">
           <Link to="/" className="text-white">Lost Paw Network</Link>
@@ -54,18 +58,18 @@ const Navbar = () => {
           </button>
         </div>
         <ul className={`md:flex space-x-4 ${isOpen ? 'block' : 'hidden'} md:block`}>
-          <li className="mb-2 md:mb-0"><Link to="/" className="text-indigo-600 hover:text-indigo-500">Home</Link></li>
-          <li className="relative mb-2 md:mb-0"
-            onMouseEnter={() => setIsReportsOpen(true)}
-            onMouseLeave={() => setIsReportsOpen(false)}
-          >
-            <div className="cursor-pointer text-indigo-600 hover:text-indigo-500 flex items-center">
+          <li className="mt-2 py-2 w-48 z-50"><Link to="/" className="text-indigo-600 hover:text-indigo-500">Home</Link></li>
+          <li className="relative mb-2 md:mb-0">
+            <div
+              onClick={toggleReportsDropdown}
+              className="cursor-pointer text-indigo-600 hover:text-indigo-500 flex items-center"
+            >
               Reports
               <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </div>
-            <ul className={`absolute bg-gray-800 text-white mt-2 py-2 w-48 border rounded-lg ${isReportsOpen ? 'block' : 'hidden'}`}>
+            <ul className={`absolute bg-gray-800 text-white mt-2 py-2 w-48 border rounded-lg z-50 ${isReportsOpen ? 'block' : 'hidden'}`}>
               <li className="px-4 py-2 text-gray-400 cursor-default">Lost Pets</li>
               <li className="px-4 py-2 hover:bg-gray-700"><Link to="/reports/lost/all">All Pets</Link></li>
               <li className="px-4 py-2 hover:bg-gray-700"><Link to="/reports/lost/cats">Cats</Link></li>
@@ -77,17 +81,17 @@ const Navbar = () => {
             </ul>
           </li>
           {isLoggedIn ? (
-            <li className="relative mb-2 md:mb-0"
-              onMouseEnter={() => setIsAccountOpen(true)}
-              onMouseLeave={() => setIsAccountOpen(false)}
-            >
-              <div className="cursor-pointer text-indigo-600 hover:text-indigo-500 flex items-center">
+            <li className="relative mb-2 md:mb-0">
+              <div
+                onClick={toggleAccountDropdown}
+                className="cursor-pointer text-indigo-600 hover:text-indigo-500 flex items-center"
+              >
                 My Account
                 <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </div>
-              <ul className={`absolute bg-gray-800 text-white right-0 mt-2 py-2 w-48 border rounded-lg ${isAccountOpen ? 'block' : 'hidden'}`}>
+              <ul className={`absolute bg-gray-800 text-white right-0 mt-2 py-2 w-48 border rounded-lg z-50 ${isAccountOpen ? 'block' : 'hidden'}`}>
                 <li className="px-4 py-2 hover:bg-gray-700"><Link to="/profile">Profile</Link></li>
                 <li className="px-4 py-2 hover:bg-gray-700"><Link to="/settings">Settings</Link></li>
                 <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer" onClick={handleLogout}>Logout</li>
