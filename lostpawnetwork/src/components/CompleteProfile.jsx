@@ -35,7 +35,7 @@ function CompleteProfile({ userId }) {
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-6 text-center">Complete Profile</h2>
         <div className="mb-4">
-          <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-700">Contact Info</label>
+          <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-700">Phone Number</label>
           <input
             type="text"
             id="contactInfo"
